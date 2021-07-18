@@ -1,0 +1,16 @@
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\obj\Debug\net5.0\UniversidadEduca_Tarea1.csproj.AssemblyReference.cache
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\obj\Debug\net5.0\UniversidadEduca_Tarea1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\obj\Debug\net5.0\UniversidadEduca_Tarea1.AssemblyInfoInputs.cache
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\obj\Debug\net5.0\UniversidadEduca_Tarea1.AssemblyInfo.cs
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\obj\Debug\net5.0\UniversidadEduca_Tarea1.csproj.CoreCompileInputs.cache
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\bin\Debug\net5.0\UniversidadEduca_Tarea1.exe
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\bin\Debug\net5.0\UniversidadEduca_Tarea1.deps.json
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\bin\Debug\net5.0\UniversidadEduca_Tarea1.runtimeconfig.json
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\bin\Debug\net5.0\UniversidadEduca_Tarea1.runtimeconfig.dev.json
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\bin\Debug\net5.0\UniversidadEduca_Tarea1.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\bin\Debug\net5.0\ref\UniversidadEduca_Tarea1.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\bin\Debug\net5.0\UniversidadEduca_Tarea1.pdb
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\obj\Debug\net5.0\UniversidadEduca_Tarea1.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\obj\Debug\net5.0\ref\UniversidadEduca_Tarea1.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\obj\Debug\net5.0\UniversidadEduca_Tarea1.pdb
+C:\Users\Gabo\source\repos\UniversidadEduca\UniversidadEduca_Tarea1\obj\Debug\net5.0\UniversidadEduca_Tarea1.genruntimeconfig.cache
