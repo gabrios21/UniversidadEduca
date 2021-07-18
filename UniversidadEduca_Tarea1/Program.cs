@@ -10,8 +10,8 @@ namespace UniversidadEduca_Tarea1 {
     class Program {
         public static void Main(string[] args) {
 
-            var userInterface = new ConsoleUI();
-            userInterface.Start();
+            var interfazUsuario = new InterfazConsola();
+            interfazUsuario.Start();
         }
     }
 }

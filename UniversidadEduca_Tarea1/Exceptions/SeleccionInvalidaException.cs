@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UniversidadEduca_Tarea1.Exceptions {
-    class NotADateException : Exception {
-        public NotADateException(string message) : base(message) {
+    class SeleccionInvalidaException : Exception {
+        public SeleccionInvalidaException(string mensaje) : base(mensaje) {
 
         }
     }

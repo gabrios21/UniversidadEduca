@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace UniversidadEduca_Tarea1.Models {
     class Profesor : UniversityMember {
-        public decimal Salary { get; private set; }
-        public LogIn LoginInfo { get; private set; }
+        public decimal Sueldo { get; private set; }
+        public LogIn Plataforma { get; private set; }
 
         public Profesor(int id, string name, string lastName, string secondLastName, decimal salary, Sede campus, LogIn loginInfo) : base(id, name, lastName, secondLastName, campus) {
-            Salary = salary;
-            LoginInfo = loginInfo;
+            Sueldo = salary;
+            Plataforma = loginInfo;
         }
     }
 }

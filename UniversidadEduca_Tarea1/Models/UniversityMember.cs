@@ -7,28 +7,28 @@ using System.Threading.Tasks;
 namespace UniversidadEduca_Tarea1.Models {
     class UniversityMember {
         public int Id { get; private set; }
-        public string Name { get; private set; }
-        public string LastName { get; private set; }
-        public string SecondLastName { get; private set; }
-        public Sede Campus { get; private set; }
-        public int CourseCounter { get; set; }
-        public Curso[] Courses { get; private set; }
+        public string Nombre { get; private set; }
+        public string Apellido { get; private set; }
+        public string SegundoApellido { get; private set; }
+        public Sede Sede { get; private set; }
+        public int ContadorCursosMatriculados { get; set; }
+        public Curso[] Cursos { get; private set; }
 
         public UniversityMember(int id, string name, string lastName, string secondLastName, Sede campus) {
             Id = id;
-            Name = name; 
-            LastName = lastName;
-            SecondLastName = secondLastName;
-            Campus = campus;
-            Courses = new Curso[20];
-            CourseCounter = 0;
+            Nombre = name; 
+            Apellido = lastName;
+            SegundoApellido = secondLastName;
+            Sede = campus;
+            Cursos = new Curso[20];
+            ContadorCursosMatriculados = 0;
         }
 
         public void Enroll(Curso course) {
-            if (CourseCounter >= Courses.Length) {
+            if (ContadorCursosMatriculados >= Cursos.Length) {
                 throw new IndexOutOfRangeException();
             }
-            Courses[CourseCounter++] = course;
+            Cursos[ContadorCursosMatriculados++] = course;
         }
     }
 }

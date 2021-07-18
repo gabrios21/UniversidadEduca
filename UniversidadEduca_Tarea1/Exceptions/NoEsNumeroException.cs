@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UniversidadEduca_Tarea1.Exceptions {
-    class DuplicateObjectException : Exception {
-        public DuplicateObjectException(string message) : base(message) {
+    class NoEsNumeroException : Exception {
+        public NoEsNumeroException(string mensaje) : base(mensaje) {
 
         }
     }
