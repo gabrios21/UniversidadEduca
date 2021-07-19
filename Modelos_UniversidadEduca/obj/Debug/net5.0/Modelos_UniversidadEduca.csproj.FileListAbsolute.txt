@@ -1,0 +1,11 @@
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\bin\Debug\net5.0\Modelos_UniversidadEduca.deps.json
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\bin\Debug\net5.0\Modelos_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\bin\Debug\net5.0\ref\Modelos_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\bin\Debug\net5.0\Modelos_UniversidadEduca.pdb
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\Modelos_UniversidadEduca.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\Modelos_UniversidadEduca.AssemblyInfoInputs.cache
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\Modelos_UniversidadEduca.AssemblyInfo.cs
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\Modelos_UniversidadEduca.csproj.CoreCompileInputs.cache
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\Modelos_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\ref\Modelos_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\Modelos_UniversidadEduca.pdb

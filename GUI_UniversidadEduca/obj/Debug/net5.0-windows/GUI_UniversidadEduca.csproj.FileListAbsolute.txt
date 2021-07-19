@@ -5,7 +5,6 @@ C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\bin\Debug\net5.
 C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\bin\Debug\net5.0-windows\GUI_UniversidadEduca.dll
 C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\bin\Debug\net5.0-windows\ref\GUI_UniversidadEduca.dll
 C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\bin\Debug\net5.0-windows\GUI_UniversidadEduca.pdb
-C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\obj\Debug\net5.0-windows\GUI_UniversidadEduca.csproj.AssemblyReference.cache
 C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\obj\Debug\net5.0-windows\GUI_UniversidadEduca.FormularioPrincipal.resources
 C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\obj\Debug\net5.0-windows\GUI_UniversidadEduca.csproj.GenerateResource.cache
 C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\obj\Debug\net5.0-windows\GUI_UniversidadEduca.GeneratedMSBuildEditorConfig.editorconfig
@@ -18,3 +17,4 @@ C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\obj\Debug\net5.
 C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\obj\Debug\net5.0-windows\GUI_UniversidadEduca.genruntimeconfig.cache
 C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\obj\Debug\net5.0-windows\GUI_UniversidadEduca.Controles.Encabezado.resources
 C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\obj\Debug\net5.0-windows\GUI_UniversidadEduca.Properties.Resources.resources
+C:\Users\Gabo\source\repos\UniversidadEduca\GUI_UniversidadEduca\bin\Debug\net5.0-windows\GUI_UniversidadEduca.dll.config
