@@ -27,12 +27,12 @@ namespace GUI_UniversidadEduca {
             this.panelEncabezado = new System.Windows.Forms.Panel();
             this.encabezado1 = new GUI_UniversidadEduca.Controles.Encabezado();
             this.nuevoProfesorPanel = new System.Windows.Forms.Panel();
+            this.sueldoProfesor = new System.Windows.Forms.TextBox();
             this.guardarProfesorBtn = new System.Windows.Forms.Button();
             this.sedeProfesor = new System.Windows.Forms.ComboBox();
             this.sedeProfesorLbl = new System.Windows.Forms.Label();
             this.contrasenaProfesor = new System.Windows.Forms.TextBox();
             this.contrasenaProfesorLbl = new System.Windows.Forms.Label();
-            this.sueldoProfesor = new System.Windows.Forms.NumericUpDown();
             this.usuarioProfesor = new System.Windows.Forms.TextBox();
             this.usuarioProfesorLbl = new System.Windows.Forms.Label();
             this.sueldoProfesorLbl = new System.Windows.Forms.Label();
@@ -67,12 +67,6 @@ namespace GUI_UniversidadEduca {
             this.seleccionSedeEstudianteLbl = new System.Windows.Forms.Label();
             this.estudiantesLbl = new System.Windows.Forms.Label();
             this.registroNotasPanel = new System.Windows.Forms.Panel();
-            this.ingresoPlataformaPanel = new System.Windows.Forms.Panel();
-            this.autenticacionPlataformaBtn = new System.Windows.Forms.Button();
-            this.nombreUsuario = new System.Windows.Forms.TextBox();
-            this.contrasenaLbl = new System.Windows.Forms.Label();
-            this.contrasena = new System.Windows.Forms.TextBox();
-            this.nombreUsuarioLbl = new System.Windows.Forms.Label();
             this.notasCursos = new System.Windows.Forms.DataGridView();
             this.cursosProfesor = new System.Windows.Forms.ComboBox();
             this.seleccionCursoLbl = new System.Windows.Forms.Label();
@@ -81,6 +75,12 @@ namespace GUI_UniversidadEduca {
             this.infoProfesor = new System.Windows.Forms.TextBox();
             this.infoProfesorLbl = new System.Windows.Forms.Label();
             this.registrarNotasLbl = new System.Windows.Forms.Label();
+            this.ingresoPlataformaPanel = new System.Windows.Forms.Panel();
+            this.autenticacionPlataformaBtn = new System.Windows.Forms.Button();
+            this.contrasena = new System.Windows.Forms.TextBox();
+            this.contrasenaLbl = new System.Windows.Forms.Label();
+            this.nombreUsuario = new System.Windows.Forms.TextBox();
+            this.nombreUsuarioLbl = new System.Windows.Forms.Label();
             this.matricularPanel = new System.Windows.Forms.Panel();
             this.matricularBtn = new System.Windows.Forms.Button();
             this.sedeMatricula = new System.Windows.Forms.ComboBox();
@@ -131,7 +131,7 @@ namespace GUI_UniversidadEduca {
             this.registrarSedeLabel = new System.Windows.Forms.Label();
             this.nuevoEstudiantePanel = new System.Windows.Forms.Panel();
             this.generoEstudiante = new System.Windows.Forms.ComboBox();
-            this.fechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.fechaNacimientoEstudiante = new System.Windows.Forms.DateTimePicker();
             this.guardarEstudianteBtn = new System.Windows.Forms.Button();
             this.sedeEstudiante = new System.Windows.Forms.ComboBox();
             this.sedeEstudianteLbl = new System.Windows.Forms.Label();
@@ -168,12 +168,11 @@ namespace GUI_UniversidadEduca {
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.panelEncabezado.SuspendLayout();
             this.nuevoProfesorPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sueldoProfesor)).BeginInit();
             this.estudiantesPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.infoCursos)).BeginInit();
             this.registroNotasPanel.SuspendLayout();
-            this.ingresoPlataformaPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notasCursos)).BeginInit();
+            this.ingresoPlataformaPanel.SuspendLayout();
             this.matricularPanel.SuspendLayout();
             this.asignarProfesorPanel.SuspendLayout();
             this.profesoresPanel.SuspendLayout();
@@ -206,12 +205,12 @@ namespace GUI_UniversidadEduca {
             // 
             // nuevoProfesorPanel
             // 
+            this.nuevoProfesorPanel.Controls.Add(this.sueldoProfesor);
             this.nuevoProfesorPanel.Controls.Add(this.guardarProfesorBtn);
             this.nuevoProfesorPanel.Controls.Add(this.sedeProfesor);
             this.nuevoProfesorPanel.Controls.Add(this.sedeProfesorLbl);
             this.nuevoProfesorPanel.Controls.Add(this.contrasenaProfesor);
             this.nuevoProfesorPanel.Controls.Add(this.contrasenaProfesorLbl);
-            this.nuevoProfesorPanel.Controls.Add(this.sueldoProfesor);
             this.nuevoProfesorPanel.Controls.Add(this.usuarioProfesor);
             this.nuevoProfesorPanel.Controls.Add(this.usuarioProfesorLbl);
             this.nuevoProfesorPanel.Controls.Add(this.sueldoProfesorLbl);
@@ -224,19 +223,28 @@ namespace GUI_UniversidadEduca {
             this.nuevoProfesorPanel.Controls.Add(this.idProfesor);
             this.nuevoProfesorPanel.Controls.Add(this.idProfesorLbl);
             this.nuevoProfesorPanel.Controls.Add(this.registrarProfesorLabel);
+            this.nuevoProfesorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nuevoProfesorPanel.Location = new System.Drawing.Point(0, 0);
             this.nuevoProfesorPanel.Name = "nuevoProfesorPanel";
             this.nuevoProfesorPanel.Size = new System.Drawing.Size(734, 477);
             this.nuevoProfesorPanel.TabIndex = 6;
+            // 
+            // sueldoProfesor
+            // 
+            this.sueldoProfesor.Location = new System.Drawing.Point(523, 104);
+            this.sueldoProfesor.Name = "sueldoProfesor";
+            this.sueldoProfesor.Size = new System.Drawing.Size(137, 23);
+            this.sueldoProfesor.TabIndex = 14;
             // 
             // guardarProfesorBtn
             // 
             this.guardarProfesorBtn.Location = new System.Drawing.Point(570, 424);
             this.guardarProfesorBtn.Name = "guardarProfesorBtn";
             this.guardarProfesorBtn.Size = new System.Drawing.Size(90, 35);
-            this.guardarProfesorBtn.TabIndex = 22;
+            this.guardarProfesorBtn.TabIndex = 21;
             this.guardarProfesorBtn.Text = "Guardar";
             this.guardarProfesorBtn.UseVisualStyleBackColor = true;
+            this.guardarProfesorBtn.Click += new System.EventHandler(this.guardarProfesorBtn_Click);
             // 
             // sedeProfesor
             // 
@@ -244,7 +252,7 @@ namespace GUI_UniversidadEduca {
             this.sedeProfesor.Location = new System.Drawing.Point(523, 254);
             this.sedeProfesor.Name = "sedeProfesor";
             this.sedeProfesor.Size = new System.Drawing.Size(137, 23);
-            this.sedeProfesor.TabIndex = 21;
+            this.sedeProfesor.TabIndex = 20;
             // 
             // sedeProfesorLbl
             // 
@@ -253,7 +261,7 @@ namespace GUI_UniversidadEduca {
             this.sedeProfesorLbl.Location = new System.Drawing.Point(385, 256);
             this.sedeProfesorLbl.Name = "sedeProfesorLbl";
             this.sedeProfesorLbl.Size = new System.Drawing.Size(44, 21);
-            this.sedeProfesorLbl.TabIndex = 20;
+            this.sedeProfesorLbl.TabIndex = 19;
             this.sedeProfesorLbl.Text = "Sede";
             // 
             // contrasenaProfesor
@@ -261,7 +269,7 @@ namespace GUI_UniversidadEduca {
             this.contrasenaProfesor.Location = new System.Drawing.Point(523, 201);
             this.contrasenaProfesor.Name = "contrasenaProfesor";
             this.contrasenaProfesor.Size = new System.Drawing.Size(137, 23);
-            this.contrasenaProfesor.TabIndex = 19;
+            this.contrasenaProfesor.TabIndex = 18;
             // 
             // contrasenaProfesorLbl
             // 
@@ -270,15 +278,8 @@ namespace GUI_UniversidadEduca {
             this.contrasenaProfesorLbl.Location = new System.Drawing.Point(388, 203);
             this.contrasenaProfesorLbl.Name = "contrasenaProfesorLbl";
             this.contrasenaProfesorLbl.Size = new System.Drawing.Size(89, 21);
-            this.contrasenaProfesorLbl.TabIndex = 18;
+            this.contrasenaProfesorLbl.TabIndex = 17;
             this.contrasenaProfesorLbl.Text = "Contraseña";
-            // 
-            // sueldoProfesor
-            // 
-            this.sueldoProfesor.Location = new System.Drawing.Point(523, 104);
-            this.sueldoProfesor.Name = "sueldoProfesor";
-            this.sueldoProfesor.Size = new System.Drawing.Size(137, 23);
-            this.sueldoProfesor.TabIndex = 17;
             // 
             // usuarioProfesor
             // 
@@ -605,69 +606,10 @@ namespace GUI_UniversidadEduca {
             this.registroNotasPanel.Controls.Add(this.infoProfesor);
             this.registroNotasPanel.Controls.Add(this.infoProfesorLbl);
             this.registroNotasPanel.Controls.Add(this.registrarNotasLbl);
-            this.registroNotasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.registroNotasPanel.Location = new System.Drawing.Point(0, 0);
+            this.registroNotasPanel.Location = new System.Drawing.Point(13, 6);
             this.registroNotasPanel.Name = "registroNotasPanel";
             this.registroNotasPanel.Size = new System.Drawing.Size(734, 477);
             this.registroNotasPanel.TabIndex = 7;
-            // 
-            // ingresoPlataformaPanel
-            // 
-            this.ingresoPlataformaPanel.Controls.Add(this.autenticacionPlataformaBtn);
-            this.ingresoPlataformaPanel.Controls.Add(this.nombreUsuario);
-            this.ingresoPlataformaPanel.Controls.Add(this.contrasenaLbl);
-            this.ingresoPlataformaPanel.Controls.Add(this.contrasena);
-            this.ingresoPlataformaPanel.Controls.Add(this.nombreUsuarioLbl);
-            this.ingresoPlataformaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ingresoPlataformaPanel.Location = new System.Drawing.Point(0, 0);
-            this.ingresoPlataformaPanel.Name = "ingresoPlataformaPanel";
-            this.ingresoPlataformaPanel.Size = new System.Drawing.Size(734, 477);
-            this.ingresoPlataformaPanel.TabIndex = 25;
-            // 
-            // autenticacionPlataformaBtn
-            // 
-            this.autenticacionPlataformaBtn.Location = new System.Drawing.Point(362, 254);
-            this.autenticacionPlataformaBtn.Name = "autenticacionPlataformaBtn";
-            this.autenticacionPlataformaBtn.Size = new System.Drawing.Size(90, 35);
-            this.autenticacionPlataformaBtn.TabIndex = 6;
-            this.autenticacionPlataformaBtn.Text = "Ingresar";
-            this.autenticacionPlataformaBtn.UseVisualStyleBackColor = true;
-            this.autenticacionPlataformaBtn.Click += new System.EventHandler(this.autenticacionPlataformaBtn_Click);
-            // 
-            // nombreUsuario
-            // 
-            this.nombreUsuario.Location = new System.Drawing.Point(272, 198);
-            this.nombreUsuario.Name = "nombreUsuario";
-            this.nombreUsuario.PasswordChar = '*';
-            this.nombreUsuario.Size = new System.Drawing.Size(180, 23);
-            this.nombreUsuario.TabIndex = 3;
-            // 
-            // contrasenaLbl
-            // 
-            this.contrasenaLbl.AutoSize = true;
-            this.contrasenaLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.contrasenaLbl.Location = new System.Drawing.Point(109, 200);
-            this.contrasenaLbl.Name = "contrasenaLbl";
-            this.contrasenaLbl.Size = new System.Drawing.Size(89, 21);
-            this.contrasenaLbl.TabIndex = 2;
-            this.contrasenaLbl.Text = "Contraseña";
-            // 
-            // contrasena
-            // 
-            this.contrasena.Location = new System.Drawing.Point(272, 131);
-            this.contrasena.Name = "contrasena";
-            this.contrasena.Size = new System.Drawing.Size(180, 23);
-            this.contrasena.TabIndex = 1;
-            // 
-            // nombreUsuarioLbl
-            // 
-            this.nombreUsuarioLbl.AutoSize = true;
-            this.nombreUsuarioLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nombreUsuarioLbl.Location = new System.Drawing.Point(105, 133);
-            this.nombreUsuarioLbl.Name = "nombreUsuarioLbl";
-            this.nombreUsuarioLbl.Size = new System.Drawing.Size(145, 21);
-            this.nombreUsuarioLbl.TabIndex = 0;
-            this.nombreUsuarioLbl.Text = "Nombre de usuario";
             // 
             // notasCursos
             // 
@@ -685,6 +627,7 @@ namespace GUI_UniversidadEduca {
             this.cursosProfesor.Name = "cursosProfesor";
             this.cursosProfesor.Size = new System.Drawing.Size(396, 23);
             this.cursosProfesor.TabIndex = 22;
+            this.cursosProfesor.SelectedIndexChanged += new System.EventHandler(this.cursosProfesor_SelectedIndexChanged);
             // 
             // seleccionCursoLbl
             // 
@@ -742,6 +685,64 @@ namespace GUI_UniversidadEduca {
             this.registrarNotasLbl.TabIndex = 13;
             this.registrarNotasLbl.Text = "REGISTRAR NOTAS";
             this.registrarNotasLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // ingresoPlataformaPanel
+            // 
+            this.ingresoPlataformaPanel.Controls.Add(this.autenticacionPlataformaBtn);
+            this.ingresoPlataformaPanel.Controls.Add(this.contrasena);
+            this.ingresoPlataformaPanel.Controls.Add(this.contrasenaLbl);
+            this.ingresoPlataformaPanel.Controls.Add(this.nombreUsuario);
+            this.ingresoPlataformaPanel.Controls.Add(this.nombreUsuarioLbl);
+            this.ingresoPlataformaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ingresoPlataformaPanel.Location = new System.Drawing.Point(0, 0);
+            this.ingresoPlataformaPanel.Name = "ingresoPlataformaPanel";
+            this.ingresoPlataformaPanel.Size = new System.Drawing.Size(734, 477);
+            this.ingresoPlataformaPanel.TabIndex = 25;
+            // 
+            // autenticacionPlataformaBtn
+            // 
+            this.autenticacionPlataformaBtn.Location = new System.Drawing.Point(362, 254);
+            this.autenticacionPlataformaBtn.Name = "autenticacionPlataformaBtn";
+            this.autenticacionPlataformaBtn.Size = new System.Drawing.Size(90, 35);
+            this.autenticacionPlataformaBtn.TabIndex = 6;
+            this.autenticacionPlataformaBtn.Text = "Ingresar";
+            this.autenticacionPlataformaBtn.UseVisualStyleBackColor = true;
+            this.autenticacionPlataformaBtn.Click += new System.EventHandler(this.AutenticacionPlataformaBtn_Click);
+            // 
+            // contrasena
+            // 
+            this.contrasena.Location = new System.Drawing.Point(272, 198);
+            this.contrasena.Name = "contrasena";
+            this.contrasena.PasswordChar = '*';
+            this.contrasena.Size = new System.Drawing.Size(180, 23);
+            this.contrasena.TabIndex = 3;
+            // 
+            // contrasenaLbl
+            // 
+            this.contrasenaLbl.AutoSize = true;
+            this.contrasenaLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.contrasenaLbl.Location = new System.Drawing.Point(109, 200);
+            this.contrasenaLbl.Name = "contrasenaLbl";
+            this.contrasenaLbl.Size = new System.Drawing.Size(89, 21);
+            this.contrasenaLbl.TabIndex = 2;
+            this.contrasenaLbl.Text = "Contraseña";
+            // 
+            // nombreUsuario
+            // 
+            this.nombreUsuario.Location = new System.Drawing.Point(272, 131);
+            this.nombreUsuario.Name = "nombreUsuario";
+            this.nombreUsuario.Size = new System.Drawing.Size(180, 23);
+            this.nombreUsuario.TabIndex = 1;
+            // 
+            // nombreUsuarioLbl
+            // 
+            this.nombreUsuarioLbl.AutoSize = true;
+            this.nombreUsuarioLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nombreUsuarioLbl.Location = new System.Drawing.Point(105, 133);
+            this.nombreUsuarioLbl.Name = "nombreUsuarioLbl";
+            this.nombreUsuarioLbl.Size = new System.Drawing.Size(145, 21);
+            this.nombreUsuarioLbl.TabIndex = 0;
+            this.nombreUsuarioLbl.Text = "Nombre de usuario";
             // 
             // matricularPanel
             // 
@@ -1176,6 +1177,7 @@ namespace GUI_UniversidadEduca {
             this.guardarSedeBtn.TabIndex = 5;
             this.guardarSedeBtn.Text = "Guardar";
             this.guardarSedeBtn.UseVisualStyleBackColor = true;
+            this.guardarSedeBtn.Click += new System.EventHandler(this.guardarSedeBtn_Click);
             // 
             // descripcionSede
             // 
@@ -1225,8 +1227,9 @@ namespace GUI_UniversidadEduca {
             // 
             // nuevoEstudiantePanel
             // 
+            this.nuevoEstudiantePanel.Controls.Add(this.registroNotasPanel);
             this.nuevoEstudiantePanel.Controls.Add(this.generoEstudiante);
-            this.nuevoEstudiantePanel.Controls.Add(this.fechaNacimiento);
+            this.nuevoEstudiantePanel.Controls.Add(this.fechaNacimientoEstudiante);
             this.nuevoEstudiantePanel.Controls.Add(this.guardarEstudianteBtn);
             this.nuevoEstudiantePanel.Controls.Add(this.sedeEstudiante);
             this.nuevoEstudiantePanel.Controls.Add(this.sedeEstudianteLbl);
@@ -1250,17 +1253,17 @@ namespace GUI_UniversidadEduca {
             // generoEstudiante
             // 
             this.generoEstudiante.FormattingEnabled = true;
-            this.generoEstudiante.Location = new System.Drawing.Point(523, 104);
+            this.generoEstudiante.Location = new System.Drawing.Point(512, 104);
             this.generoEstudiante.Name = "generoEstudiante";
-            this.generoEstudiante.Size = new System.Drawing.Size(126, 23);
+            this.generoEstudiante.Size = new System.Drawing.Size(137, 23);
             this.generoEstudiante.TabIndex = 24;
             // 
-            // fechaNacimiento
+            // fechaNacimientoEstudiante
             // 
-            this.fechaNacimiento.Location = new System.Drawing.Point(166, 310);
-            this.fechaNacimiento.Name = "fechaNacimiento";
-            this.fechaNacimiento.Size = new System.Drawing.Size(216, 23);
-            this.fechaNacimiento.TabIndex = 23;
+            this.fechaNacimientoEstudiante.Location = new System.Drawing.Point(166, 310);
+            this.fechaNacimientoEstudiante.Name = "fechaNacimientoEstudiante";
+            this.fechaNacimientoEstudiante.Size = new System.Drawing.Size(216, 23);
+            this.fechaNacimientoEstudiante.TabIndex = 23;
             // 
             // guardarEstudianteBtn
             // 
@@ -1270,6 +1273,7 @@ namespace GUI_UniversidadEduca {
             this.guardarEstudianteBtn.TabIndex = 22;
             this.guardarEstudianteBtn.Text = "Guardar";
             this.guardarEstudianteBtn.UseVisualStyleBackColor = true;
+            this.guardarEstudianteBtn.Click += new System.EventHandler(this.guardarEstudianteBtn_Click);
             // 
             // sedeEstudiante
             // 
@@ -1283,7 +1287,7 @@ namespace GUI_UniversidadEduca {
             // 
             this.sedeEstudianteLbl.AutoSize = true;
             this.sedeEstudianteLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.sedeEstudianteLbl.Location = new System.Drawing.Point(374, 203);
+            this.sedeEstudianteLbl.Location = new System.Drawing.Point(423, 201);
             this.sedeEstudianteLbl.Name = "sedeEstudianteLbl";
             this.sedeEstudianteLbl.Size = new System.Drawing.Size(44, 21);
             this.sedeEstudianteLbl.TabIndex = 20;
@@ -1293,7 +1297,7 @@ namespace GUI_UniversidadEduca {
             // 
             this.generoEstudianteLbl.AutoSize = true;
             this.generoEstudianteLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.generoEstudianteLbl.Location = new System.Drawing.Point(377, 102);
+            this.generoEstudianteLbl.Location = new System.Drawing.Point(409, 106);
             this.generoEstudianteLbl.Name = "generoEstudianteLbl";
             this.generoEstudianteLbl.Size = new System.Drawing.Size(61, 21);
             this.generoEstudianteLbl.TabIndex = 15;
@@ -1429,6 +1433,7 @@ namespace GUI_UniversidadEduca {
             this.guardarCursoBtn.TabIndex = 5;
             this.guardarCursoBtn.Text = "Guardar";
             this.guardarCursoBtn.UseVisualStyleBackColor = true;
+            this.guardarCursoBtn.Click += new System.EventHandler(this.guardarCursoBtn_Click);
             // 
             // descripcionCurso
             // 
@@ -1594,16 +1599,15 @@ namespace GUI_UniversidadEduca {
             // 
             // panelPrincipal
             // 
-            this.panelPrincipal.Controls.Add(this.ingresoPlataformaPanel);
-            this.panelPrincipal.Controls.Add(this.registroNotasPanel);
-            this.panelPrincipal.Controls.Add(this.asignarProfesorPanel);
-            this.panelPrincipal.Controls.Add(this.matricularPanel);
+            this.panelPrincipal.Controls.Add(this.nuevoEstudiantePanel);
             this.panelPrincipal.Controls.Add(this.estudiantesPanel);
-            this.panelPrincipal.Controls.Add(this.nuevoProfesorPanel);
             this.panelPrincipal.Controls.Add(this.profesoresPanel);
             this.panelPrincipal.Controls.Add(this.nuevoCursoPanel);
-            this.panelPrincipal.Controls.Add(this.nuevoEstudiantePanel);
             this.panelPrincipal.Controls.Add(this.nuevaSedePanel);
+            this.panelPrincipal.Controls.Add(this.nuevoProfesorPanel);
+            this.panelPrincipal.Controls.Add(this.ingresoPlataformaPanel);
+            this.panelPrincipal.Controls.Add(this.asignarProfesorPanel);
+            this.panelPrincipal.Controls.Add(this.matricularPanel);
             this.panelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPrincipal.Location = new System.Drawing.Point(201, 152);
             this.panelPrincipal.Name = "panelPrincipal";
@@ -1626,15 +1630,14 @@ namespace GUI_UniversidadEduca {
             this.panelEncabezado.PerformLayout();
             this.nuevoProfesorPanel.ResumeLayout(false);
             this.nuevoProfesorPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sueldoProfesor)).EndInit();
             this.estudiantesPanel.ResumeLayout(false);
             this.estudiantesPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.infoCursos)).EndInit();
             this.registroNotasPanel.ResumeLayout(false);
             this.registroNotasPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notasCursos)).EndInit();
             this.ingresoPlataformaPanel.ResumeLayout(false);
             this.ingresoPlataformaPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.notasCursos)).EndInit();
             this.matricularPanel.ResumeLayout(false);
             this.matricularPanel.PerformLayout();
             this.asignarProfesorPanel.ResumeLayout(false);
@@ -1689,7 +1692,6 @@ namespace GUI_UniversidadEduca {
         private System.Windows.Forms.Label segundoApellidoProfesorLbl;
         private System.Windows.Forms.TextBox apellidoProfesor;
         private System.Windows.Forms.Label apellidoProfesorLbl;
-        private System.Windows.Forms.NumericUpDown sueldoProfesor;
         private System.Windows.Forms.Button guardarProfesorBtn;
         private System.Windows.Forms.ComboBox sedeProfesor;
         private System.Windows.Forms.Label sedeProfesorLbl;
@@ -1710,7 +1712,7 @@ namespace GUI_UniversidadEduca {
         private System.Windows.Forms.TextBox idEstudiante;
         private System.Windows.Forms.Label idEstudianteLbl;
         private System.Windows.Forms.Label registrarEstudianteLabel;
-        private System.Windows.Forms.DateTimePicker fechaNacimiento;
+        private System.Windows.Forms.DateTimePicker fechaNacimientoEstudiante;
         private System.Windows.Forms.ComboBox generoEstudiante;
         private System.Windows.Forms.Panel nuevoCursoPanel;
         private System.Windows.Forms.Button guardarCursoBtn;
@@ -1724,9 +1726,9 @@ namespace GUI_UniversidadEduca {
         private System.Windows.Forms.Panel ingresoPlataformaPanel;
         private System.Windows.Forms.Panel registroNotasPanel;
         private System.Windows.Forms.Button autenticacionPlataformaBtn;
-        private System.Windows.Forms.TextBox nombreUsuario;
-        private System.Windows.Forms.Label contrasenaLbl;
         private System.Windows.Forms.TextBox contrasena;
+        private System.Windows.Forms.Label contrasenaLbl;
+        private System.Windows.Forms.TextBox nombreUsuario;
         private System.Windows.Forms.Label nombreUsuarioLbl;
         private System.Windows.Forms.Label seleccionCursoLbl;
         private System.Windows.Forms.TextBox infoSede;
@@ -1798,6 +1800,7 @@ namespace GUI_UniversidadEduca {
         private System.Windows.Forms.Label cursoMatriculaLbl;
         private System.Windows.Forms.Label estudianteMatriculaLbl;
         private System.Windows.Forms.Label matricularLbl;
+        private System.Windows.Forms.TextBox sueldoProfesor;
     }
 }
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniversidadEduca_Tarea1.Models {
+﻿namespace UniversidadEduca_Tarea1.Models {
     public class Curso {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -16,6 +10,11 @@ namespace UniversidadEduca_Tarea1.Models {
             Nombre = name;
             Descripcion = description;
             Nota = nota;
+        }
+
+        public override string ToString() {
+            var cursoEnTexto = $"{Id} - {Nombre}";
+            return cursoEnTexto;
         }
     }
 }

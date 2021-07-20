@@ -9,3 +9,4 @@ C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\n
 C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\Modelos_UniversidadEduca.dll
 C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\ref\Modelos_UniversidadEduca.dll
 C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\Modelos_UniversidadEduca.pdb
+C:\Users\Gabo\source\repos\UniversidadEduca\Modelos_UniversidadEduca\obj\Debug\net5.0\Modelos_UniversidadEduca.csproj.AssemblyReference.cache

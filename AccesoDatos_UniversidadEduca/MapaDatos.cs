@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using UniversidadEduca_Tarea1.Exceptions;
 using UniversidadEduca_Tarea1.Models;
 
 namespace AccesoDatos_UniversidadEduca {
-    public class MapaDatos<T> {
+    public class MapaDatos {
+
         public string InformacionConexion { get; private set; }
 
         public MapaDatos() {
@@ -16,11 +17,15 @@ namespace AccesoDatos_UniversidadEduca {
         #region Crear
 
         public void CrearEstudiante(Estudiante estudiante) {
+            
+            if (EstudianteExiste(estudiante.Id)) {
+                throw new ObjetoDuplicadoException("El estudiante digitado ya está en el sistema");
+            }
 
             string sentenciaSql = @"INSERT INTO Estudiante (IdEstudiante, IdSede, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Genero)
                                     VALUES (@IdEstudiante, @IdSede, @Nombre, @PrimerApellido, @SegundoApellido, @FechaNacimiento, @Genero)";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -46,10 +51,18 @@ namespace AccesoDatos_UniversidadEduca {
 
         public void CrearProfesor(Profesor profesor) {
 
+            if (ProfesorExiste(profesor.Id)) {
+                throw new ObjetoDuplicadoException("El profesor digitado ya está en el sistema");
+            }
+
+            if (NombreUsuarioExiste(profesor.Plataforma.Usuario)) {
+                throw new ObjetoDuplicadoException("El nombre de usuario seleccionado ya existe.");
+            }
+
             string sentenciaSql = @"INSERT INTO Profesor (IdProfesor, IdSede, Nombre, PrimerApellido, SegundoApellido, Sueldo, Usuario, Contrasenna)
                                     VALUES (@IdProfesor, @IdSede, @Nombre, @PrimerApellido, @SegundoApellido, @Sueldo, @Usuario, @Contrasenna)";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -76,10 +89,14 @@ namespace AccesoDatos_UniversidadEduca {
 
         public void CrearCurso(Curso curso) {
 
+            if (CursoExiste(curso.Id)) {
+                throw new ObjetoDuplicadoException("El curso digitado ya existe");
+            }
+
             string sentenciaSql = @"INSERT INTO Curso (IdCurso, Nombre, Descripcion)
                                     VALUES (@IdCurso, @Nombre, @Descripcion)";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -100,10 +117,14 @@ namespace AccesoDatos_UniversidadEduca {
 
         public void CrearSede(Sede sede) {
 
-            string sentenciaSql = @"INSERT INTO Curso (IdSede, Descripcion)
+            if (SedeExiste(sede.Id)) {
+                throw new ObjetoDuplicadoException("La sede digitada ya existe");
+            }
+
+            string sentenciaSql = @"INSERT INTO Sede (IdSede, Descripcion)
                                     VALUES (@IdSede, @Descripcion)";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -121,12 +142,192 @@ namespace AccesoDatos_UniversidadEduca {
             }
         }
 
+        #endregion
+
+        public bool CredencialesSonCorrectas(string usuario, string contrasena) {
+            SqlDataReader lector;
+
+            string sentenciaSql = @$"SELECT Contrasenna
+                                    FROM Profesor
+                                    WHERE Usuario  = @Usuario";
+
+            using (SqlConnection conexion = new(InformacionConexion)) {
+
+                SqlCommand comando = new SqlCommand {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@Usuario", usuario);
+                lector = comando.ExecuteReader();
+
+                if (lector.Read()) {  
+                    var contrasenaEnArchivo = lector.GetString(0);
+                    return contrasena.Equals(contrasenaEnArchivo);
+                }
+            }
+
+            return false;
+        }
+
+        private bool NombreUsuarioExiste(string usuario) {
+            SqlDataReader lector;
+
+            string sentenciaSql = @$"SELECT *
+                                    FROM Profesor
+                                    WHERE Usuario  = @Usuario";
+
+            using (SqlConnection conexion = new(InformacionConexion)) {
+
+                SqlCommand comando = new SqlCommand {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@Usuario", usuario);
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows) {  //Si el query devuelve resultados ya existe el usuario en la BD
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool EstudianteExiste(int idEstudiante) {
+            SqlDataReader lector;
+
+            string sentenciaSql = @$"SELECT *
+                                    FROM Estudiante
+                                    WHERE IdEstudiante = @IdEstudiante";
+
+            using (SqlConnection conexion = new(InformacionConexion)) {
+
+                SqlCommand comando = new SqlCommand {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdEstudiante", idEstudiante);
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows) {  //Si el query devuelve resultados ya existe el Id en la BD
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool ProfesorExiste(int idProfesor) {
+            SqlDataReader lector;
+
+            string sentenciaSql = @$"SELECT *
+                                    FROM Profesor
+                                    WHERE IdProfesor = @IdProfesor";
+
+            using (SqlConnection conexion = new(InformacionConexion)) {
+
+                SqlCommand comando = new SqlCommand {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdProfesor", idProfesor);
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows) {  //Si el query devuelve resultados ya existe el Id en la BD
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool SedeExiste(int idSede) {
+
+            SqlDataReader lector;
+
+            string sentenciaSql = @$"SELECT *
+                                    FROM Sede
+                                    WHERE IdSede = @IdSede";
+
+            using (SqlConnection conexion = new(InformacionConexion)) {
+
+                SqlCommand comando = new SqlCommand {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdSede", idSede);
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows) {  //Si el query devuelve resultados ya existe el Id en la BD
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool CursoExiste(int idCurso) {
+
+            SqlDataReader lector;
+
+            string sentenciaSql = @$"SELECT *
+                                    FROM Curso
+                                    WHERE IdCurso = @IdCurso";
+
+            using (SqlConnection conexion = new(InformacionConexion)) {
+
+                SqlCommand comando = new SqlCommand {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdCurso", idCurso);
+
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows) {  //Si el query devuelve resultados ya existe el Id en la BD
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void MatricularEstudiante(int estudianteId, int cursoId) {
 
             string sentenciaSql = @"INSERT INTO CursoEstudiante (IdCurso, IdEstudiante)
                                     VALUES (@IdCurso, @IdEstudiante)";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -149,7 +350,7 @@ namespace AccesoDatos_UniversidadEduca {
             string sentenciaSql = @"INSERT INTO CursoProfesor (IdCurso, IdProfesor)
                                     VALUES (@IdCurso, @IdProfesor)";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -167,8 +368,6 @@ namespace AccesoDatos_UniversidadEduca {
             }
         }
 
-        #endregion
-
         #region Obtener
 
         public List<Profesor> ObtenerProfesores() {
@@ -180,7 +379,7 @@ namespace AccesoDatos_UniversidadEduca {
             string sentenciaSql = @"SELECT IdProfesor, IdSede, Nombre, PrimerApellido, SegundoApellido, Sueldo, Usuario, Contrasenna
                                     FROM Profesor";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -194,7 +393,7 @@ namespace AccesoDatos_UniversidadEduca {
                 if (lector.HasRows) {
                     while (lector.Read()) {
                         var id = lector.GetInt32(0);
-                        var idSede = lector.GetString(1);
+                        var idSede = lector.GetInt32(1);
                         var nombre = lector.GetString(2);
                         var apellido = lector.GetString(3);
                         var segundoApellido = lector.GetString(4);
@@ -203,7 +402,7 @@ namespace AccesoDatos_UniversidadEduca {
                         var usuario = lector.GetString(6);
                         var contrasena = lector.GetString(7);
                         //Obtener objeto sede
-                        Sede sede = ObtenerUnaSede(idSede);
+                        Sede sede = ObtenerSede(idSede);
                         AccesoPlataforma infoPlataforma = new(usuario, contrasena);
                         Profesor profesor = new(id, nombre, apellido, segundoApellido, sueldo, sede, infoPlataforma);
                         profesor.Cursos = ObtenerCursosProfesor(profesor.Id);
@@ -216,15 +415,15 @@ namespace AccesoDatos_UniversidadEduca {
         }
 
         private List<Curso> ObtenerCursosProfesor(int profesorId) {
-            List<Curso> cursos = new List<Curso>();
+            List<Curso> cursos = new();
             SqlDataReader lector;
 
 
-            string sentenciaSql = @$"SELECT IdCurso, NotaFinal
-                                    FROM CursoEstudiante
-                                    WHERE IdEstudiante = {profesorId}";
+            string sentenciaSql = @$"SELECT IdCurso
+                                    FROM CursoProfesor
+                                    WHERE IdProfesor = @IdProfesor";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -233,6 +432,10 @@ namespace AccesoDatos_UniversidadEduca {
                 };
 
                 conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdProfesor", profesorId);
+
                 lector = comando.ExecuteReader();
 
                 if (lector.HasRows) {
@@ -247,16 +450,60 @@ namespace AccesoDatos_UniversidadEduca {
             return cursos;
         }
 
+        public Profesor ObtenerProfesor(string usuarioABuscar) {
+            Profesor profesor = default;
+            SqlDataReader lector;
+
+
+            string sentenciaSql = @$"SELECT IdProfesor, IdSede, Nombre, PrimerApellido, SegundoApellido, Sueldo, Usuario, Contrasenna
+                                    FROM Profesor
+                                    WHERE Usuario = @Usuario";
+
+            using (SqlConnection conexion = new(InformacionConexion)) {
+
+                SqlCommand comando = new SqlCommand {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@Usuario", usuarioABuscar);
+                lector = comando.ExecuteReader();
+
+                while (lector.Read()) {
+                    var id = lector.GetInt32(0);
+                    var idSede = lector.GetInt32(1);
+                    var nombre = lector.GetString(2);
+                    var apellido = lector.GetString(3);
+                    var segundoApellido = lector.GetString(4);
+                    //El sueldo puede ser nulo según la BD, así que asignamos 0 en esos casos
+                    var sueldo = lector.IsDBNull(5) ? 0 : lector.GetDecimal(5);
+                    var usuario = lector.GetString(6);
+                    var contrasena = lector.GetString(7);
+                    //Obtener objeto sede
+                    Sede sede = ObtenerSede(idSede);
+                    AccesoPlataforma infoPlataforma = new(usuario, contrasena);
+                    profesor = new(id, nombre, apellido, segundoApellido, sueldo, sede, infoPlataforma);
+                    profesor.Cursos = ObtenerCursosProfesor(profesor.Id);
+                }
+            }
+
+            return profesor;
+        }
+
         public List<Estudiante> ObtenerEstudiantes() {
 
-            List<Estudiante> estudiantes = new List<Estudiante>();
+            List<Estudiante> estudiantes = new();
             SqlDataReader lector;
 
 
             string sentenciaSql = @"SELECT IdEstudiante, IdSede, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Genero
                                     FROM Estudiante";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -270,7 +517,7 @@ namespace AccesoDatos_UniversidadEduca {
                 if (lector.HasRows) {
                     while (lector.Read()) {
                         var id = lector.GetInt32(0);
-                        var idSede = lector.GetString(1);
+                        var idSede = lector.GetInt32(1);
                         var nombre = lector.GetString(2);
                         var apellido = lector.GetString(3);
                         var segundoApellido = lector.GetString(4);
@@ -278,7 +525,7 @@ namespace AccesoDatos_UniversidadEduca {
                         var fechaNacimiento = lector.IsDBNull(5) ? default : lector.GetDateTime(5); 
                         var genero = lector.GetChar(6);
                         //Obtener objeto sede
-                        Sede sede = ObtenerUnaSede(idSede);
+                        Sede sede = ObtenerSede(idSede);
                         Estudiante estudiante = new(id, nombre, apellido, segundoApellido, fechaNacimiento, genero, sede);
                         //Obtener cursos
                         estudiante.Cursos = ObtenerCursosEstudiante(estudiante.Id);
@@ -291,15 +538,15 @@ namespace AccesoDatos_UniversidadEduca {
         }
 
         private List<Curso> ObtenerCursosEstudiante(int estudianteId) {
-            List<Curso> cursos = new List<Curso>();
+            List<Curso> cursos = new();
             SqlDataReader lector;
 
 
             string sentenciaSql = @$"SELECT IdCurso, NotaFinal
                                     FROM CursoEstudiante
-                                    WHERE IdEstudiante = {estudianteId}";
+                                    WHERE IdEstudiante = @IdEstudiante";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -308,6 +555,9 @@ namespace AccesoDatos_UniversidadEduca {
                 };
 
                 conexion.Open();
+                //Agregar parametros
+                comando.Parameters.AddWithValue("IdEstudiante", estudianteId);
+
                 lector = comando.ExecuteReader();
 
                 if (lector.HasRows) {
@@ -333,7 +583,7 @@ namespace AccesoDatos_UniversidadEduca {
             string sentenciaSql = @"SELECT IdCurso, Nombre, Descripcion
                                     FROM Curso";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -366,9 +616,9 @@ namespace AccesoDatos_UniversidadEduca {
 
             string sentenciaSql = @$"SELECT IdCurso, Nombre, Descripcion
                                     FROM Curso
-                                    WHERE IdCurso = {idCurso}";
+                                    WHERE IdCurso = @IdCurso";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -377,9 +627,12 @@ namespace AccesoDatos_UniversidadEduca {
                 };
 
                 conexion.Open();
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdCurso", idCurso);
+
                 lector = comando.ExecuteReader();
 
-                if (lector.HasRows) {
+                while (lector.Read()) {
                     var id = lector.GetInt32(0);
                     var nombre = lector.GetString(1);
                     var descripcion = lector.GetString(2);
@@ -396,10 +649,10 @@ namespace AccesoDatos_UniversidadEduca {
             SqlDataReader lector;
 
 
-            string sentenciaSql = @"SELECT IdCurso, Nombre, Descripcion
-                                    FROM Curso";
+            string sentenciaSql = @"SELECT IdSede, Descripcion
+                                    FROM Sede";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
 
                 SqlCommand comando = new SqlCommand {
                     CommandType = CommandType.Text,
@@ -423,23 +676,27 @@ namespace AccesoDatos_UniversidadEduca {
             return sedes;
         }
 
-        private Sede ObtenerUnaSede(string idSede) {
+        private Sede ObtenerSede(int idSede) {
             Sede sede = default;
             SqlDataReader lector;
             SqlCommand comando = new SqlCommand();
 
             string sentenciaSql = @$"SELECT IdSede, Descripcion
                                     FROM Sede
-                                    WHERE IdSede = {idSede}";
+                                    WHERE IdSede = @IdSede";
 
-            using (SqlConnection conexion = new SqlConnection(InformacionConexion)) {
+            using (SqlConnection conexion = new(InformacionConexion)) {
                 comando.CommandType = CommandType.Text;
                 comando.CommandText = sentenciaSql;
                 comando.Connection = conexion;
 
+                conexion.Open();
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdSede", idSede);
+
                 lector = comando.ExecuteReader();
 
-                if (lector.HasRows) {
+                while (lector.Read()) {
                     var id = lector.GetInt32(0);
                     var descripcion = lector.GetString(1);
                     sede = new Sede(id, descripcion);

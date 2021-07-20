@@ -2,14 +2,14 @@ C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\bin\Deb
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\bin\Debug\net5.0\AccesoDatos_UniversidadEduca.dll
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\bin\Debug\net5.0\ref\AccesoDatos_UniversidadEduca.dll
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\bin\Debug\net5.0\AccesoDatos_UniversidadEduca.pdb
+C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\bin\Debug\net5.0\Modelos_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\bin\Debug\net5.0\Modelos_UniversidadEduca.pdb
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\AccesoDatos_UniversidadEduca.csproj.AssemblyReference.cache
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\AccesoDatos_UniversidadEduca.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\AccesoDatos_UniversidadEduca.AssemblyInfoInputs.cache
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\AccesoDatos_UniversidadEduca.AssemblyInfo.cs
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\AccesoDatos_UniversidadEduca.csproj.CoreCompileInputs.cache
+C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\AccesoDatos_UniversidadEduca.csproj.CopyComplete
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\AccesoDatos_UniversidadEduca.dll
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\ref\AccesoDatos_UniversidadEduca.dll
 C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\AccesoDatos_UniversidadEduca.pdb
-C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\obj\Debug\net5.0\AccesoDatos_UniversidadEduca.csproj.CopyComplete
-C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\bin\Debug\net5.0\Modelos_UniversidadEduca.dll
-C:\Users\Gabo\source\repos\UniversidadEduca\AccesoDatos_UniversidadEduca\bin\Debug\net5.0\Modelos_UniversidadEduca.pdb

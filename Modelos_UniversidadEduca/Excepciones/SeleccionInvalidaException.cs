@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UniversidadEduca_Tarea1.Exceptions {
-    class SeleccionInvalidaException : Exception {
+    public class SeleccionInvalidaException : ApplicationException {
         public SeleccionInvalidaException(string mensaje) : base(mensaje) {
 
         }

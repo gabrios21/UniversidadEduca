@@ -1,0 +1,17 @@
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\bin\Debug\net5.0\Gestores_UniversidadEduca.deps.json
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\bin\Debug\net5.0\Gestores_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\bin\Debug\net5.0\ref\Gestores_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\bin\Debug\net5.0\Gestores_UniversidadEduca.pdb
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\bin\Debug\net5.0\AccesoDatos_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\bin\Debug\net5.0\Modelos_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\bin\Debug\net5.0\AccesoDatos_UniversidadEduca.pdb
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\bin\Debug\net5.0\Modelos_UniversidadEduca.pdb
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\obj\Debug\net5.0\Gestores_UniversidadEduca.csproj.AssemblyReference.cache
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\obj\Debug\net5.0\Gestores_UniversidadEduca.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\obj\Debug\net5.0\Gestores_UniversidadEduca.AssemblyInfoInputs.cache
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\obj\Debug\net5.0\Gestores_UniversidadEduca.AssemblyInfo.cs
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\obj\Debug\net5.0\Gestores_UniversidadEduca.csproj.CoreCompileInputs.cache
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\obj\Debug\net5.0\Gestores_UniversidadEduca.csproj.CopyComplete
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\obj\Debug\net5.0\Gestores_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\obj\Debug\net5.0\ref\Gestores_UniversidadEduca.dll
+C:\Users\Gabo\source\repos\UniversidadEduca\Gestores_UniversidadEduca\obj\Debug\net5.0\Gestores_UniversidadEduca.pdb

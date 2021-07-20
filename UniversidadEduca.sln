@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos_UniversidadEduc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelos_UniversidadEduca", "Modelos_UniversidadEduca\Modelos_UniversidadEduca.csproj", "{D070990B-C533-4454-8A81-D9AAE6020D73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestores_UniversidadEduca", "Gestores_UniversidadEduca\Gestores_UniversidadEduca.csproj", "{3C617C83-9A9B-40AD-AC59-B023ABC0A6DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D070990B-C533-4454-8A81-D9AAE6020D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D070990B-C533-4454-8A81-D9AAE6020D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D070990B-C533-4454-8A81-D9AAE6020D73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C617C83-9A9B-40AD-AC59-B023ABC0A6DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C617C83-9A9B-40AD-AC59-B023ABC0A6DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C617C83-9A9B-40AD-AC59-B023ABC0A6DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C617C83-9A9B-40AD-AC59-B023ABC0A6DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

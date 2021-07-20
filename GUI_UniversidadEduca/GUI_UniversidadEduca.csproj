@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gestores_UniversidadEduca\Gestores_UniversidadEduca.csproj" />
+    <ProjectReference Include="..\Modelos_UniversidadEduca\Modelos_UniversidadEduca.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

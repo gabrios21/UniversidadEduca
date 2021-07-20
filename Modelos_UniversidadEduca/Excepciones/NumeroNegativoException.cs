@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UniversidadEduca_Tarea1.Exceptions {
-    class NumeroNegativoException : Exception {
+    public class NumeroNegativoException : ApplicationException {
         public NumeroNegativoException(string mensaje) : base(mensaje) {
 
         }
