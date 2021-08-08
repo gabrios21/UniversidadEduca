@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\AccesoDatos_UniversidadEduca.csproj": {}
+    "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\AccesoDatos_UniversidadEduca.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\AccesoDatos_UniversidadEduca.csproj": {
+    "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\AccesoDatos_UniversidadEduca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\AccesoDatos_UniversidadEduca.csproj",
+        "projectUniqueName": "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\AccesoDatos_UniversidadEduca.csproj",
         "projectName": "AccesoDatos_UniversidadEduca",
-        "projectPath": "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\AccesoDatos_UniversidadEduca.csproj",
-        "packagesPath": "C:\\Users\\Gabo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\obj\\",
+        "projectPath": "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\AccesoDatos_UniversidadEduca.csproj",
+        "packagesPath": "C:\\Users\\grios\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\AccesoDatos_UniversidadEduca\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Gabo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\grios\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -31,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj": {
-                "projectPath": "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj"
+              "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj": {
+                "projectPath": "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj"
               }
             }
           }
@@ -75,20 +72,17 @@
         }
       }
     },
-    "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj": {
+    "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj",
+        "projectUniqueName": "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj",
         "projectName": "Modelos_UniversidadEduca",
-        "projectPath": "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj",
-        "packagesPath": "C:\\Users\\Gabo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabo\\source\\repos\\UniversidadEduca\\Modelos_UniversidadEduca\\obj\\",
+        "projectPath": "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\Modelos_UniversidadEduca\\Modelos_UniversidadEduca.csproj",
+        "packagesPath": "C:\\Users\\grios\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\grios\\source\\repos\\College\\UniversidadEduca\\Modelos_UniversidadEduca\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Gabo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\grios\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -3,22 +3,23 @@ using Modelos_UniversidadEduca.Excepciones;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using UniversidadEduca_Tarea1.Exceptions;
 using UniversidadEduca_Tarea1.Models;
 
 namespace GUI_UniversidadEduca {
     public partial class FormularioPrincipal : Form {
 
         private List<Panel> Paneles;
-        List<string> Generos => new() { "Masculino", "Femenino" };
-        GestorSede gestorSede => new();
-        GestorCurso gestorCurso => new();
-        GestorProfesor gestorProfesor => new();
-        GestorEstudiante gestorEstudiante => new();
-        GestorNotas gestorNotas => new();
-        public FormularioPrincipal() {
+        private List<string> Generos => new() { "Masculino", "Femenino" };
+        private GestorSede GestorSede => new();
+        private GestorCurso GestorCurso => new();
+        private GestorProfesor GestorProfesor => new();
+        private GestorEstudiante GestorEstudiante => new();
+        private GestorNotas GestorNotas => new();
 
+        private (List<Estudiante>,int) EstudiantesEnCurso { get; set; }
+        public FormularioPrincipal() {
             InitializeComponent();
+            EstudiantesEnCurso = (new List<Estudiante>(), 0);
         }
 
         private void FormularioPrincipal_Load(object sender, EventArgs e) {
@@ -38,13 +39,6 @@ namespace GUI_UniversidadEduca {
             //Ocultar distintos paneles durante inicialización
             OcultarPaneles();
 
-            //Cargar sedes en combobox
-            var listaSedes = gestorSede.ObtenerListaSedes();
-            foreach (Sede sede in listaSedes) {
-                sedeProfesor.Items.Add(sede);
-                sedeEstudiante.Items.Add(sede);
-            }
-
             //Cargar generos en combobox
             foreach (string genero in Generos) {
                 generoEstudiante.Items.Add(genero);
@@ -54,11 +48,25 @@ namespace GUI_UniversidadEduca {
         private void registrarProfesorBtn_Click(object sender, EventArgs e) {
             OcultarPaneles();
             nuevoProfesorPanel.Visible = true;
+            //Cargar sedes en combobox
+            var listaSedes = GestorSede.ObtenerListaSedes();
+            foreach (Sede sede in listaSedes) {
+                if (!sedeProfesor.Items.Contains(sede)) {
+                    sedeProfesor.Items.Add(sede);
+                }
+            }
         }
 
         private void registrarEstudianteBtn_Click(object sender, EventArgs e) {
             OcultarPaneles();
             nuevoEstudiantePanel.Visible = true;
+            //Cargar sedes en combobox
+            var listaSedes = GestorSede.ObtenerListaSedes();
+            foreach (Sede sede in listaSedes) {
+                if (!sedeEstudiante.Items.Contains(sede)) {
+                    sedeEstudiante.Items.Add(sede);
+                }
+            }
         }
 
         private void registrarSedeBtn_Click(object sender, EventArgs e) {
@@ -78,21 +86,56 @@ namespace GUI_UniversidadEduca {
         private void matricularEstudianteBtn_Click(object sender, EventArgs e) {
             OcultarPaneles();
             matricularPanel.Visible = true;
+
+            //Cargar sedes en combobox
+            var listaSedes = GestorSede.ObtenerListaSedes();
+            foreach (Sede sede in listaSedes)
+            {
+                if (!sedeMatricula.Items.Contains(sede))
+                {
+                    sedeMatricula.Items.Add(sede);
+                }
+            }
         }
 
         private void asignarCursoProfesorBtn_Click(object sender, EventArgs e) {
             OcultarPaneles();
             asignarProfesorPanel.Visible = true;
+
+            //Cargar sedes en combobox
+            var listaSedes = GestorSede.ObtenerListaSedes();
+            foreach (Sede sede in listaSedes) {
+                if (!asignacionSedeProfesor.Items.Contains(sede)) {
+                    asignacionSedeProfesor.Items.Add(sede);
+                }
+            }
         }
 
         private void mostrarEstudiantesBtn_Click(object sender, EventArgs e) {
             OcultarPaneles();
             estudiantesPanel.Visible = true;
+
+            //Cargar sedes en combobox
+            var listaSedes = GestorSede.ObtenerListaSedes();
+            foreach (Sede sede in listaSedes) {
+                if (!seleccionSedeEstudiante.Items.Contains(sede)) {
+                    seleccionSedeEstudiante.Items.Add(sede);
+                }
+            }
+
         }
 
         private void mostrarProfesoresBtn_Click(object sender, EventArgs e) {
             OcultarPaneles();
             profesoresPanel.Visible = true;
+
+            //Cargar sedes en combobox
+            var listaSedes = GestorSede.ObtenerListaSedes();
+            foreach (Sede sede in listaSedes) {
+                if (!seleccionSedeProf.Items.Contains(sede)) {
+                    seleccionSedeProf.Items.Add(sede);
+                }
+            }
         }
 
         private void OcultarPaneles() {
@@ -106,7 +149,7 @@ namespace GUI_UniversidadEduca {
                 string usuario = ObtenerTextoDeEntrada(nombreUsuario.Text, "usuario");
                 string contrasenaAcceso = ObtenerTextoDeEntrada(contrasena.Text, "contraseña");
 
-                bool estaAutorizado = gestorNotas.CredencialesSonCorrectas(usuario, contrasenaAcceso);
+                bool estaAutorizado = GestorNotas.CredencialesSonCorrectas(usuario, contrasenaAcceso);
                 if (estaAutorizado) {
                     ingresoPlataformaPanel.Visible = false;
                     CargarInformacionProfesor(usuario);
@@ -125,11 +168,13 @@ namespace GUI_UniversidadEduca {
 
         private void CargarInformacionProfesor(string usuario) {
             try {
-                Profesor profesor = gestorProfesor.ObtenerProfesor(usuario);
+                Profesor profesor = GestorProfesor.ObtenerProfesor(usuario);
                 infoProfesor.Text = $"{profesor.Id} - {profesor.Nombre} {profesor.Apellido} {profesor.SegundoApellido}";
                 infoSede.Text = profesor.Sede.ToString();
                 foreach (Curso curso in profesor.Cursos) {
-                    cursosProfesor.Items.Add(curso);
+                    if (!cursosProfesor.Items.Contains(curso)) { //Solo se agrega si es un curso nuevo
+                        cursosProfesor.Items.Add(curso);
+                    }
                 }
             } catch (Exception ex) {
                 MostrarAlerta($"Error al obtener la información del profesor: {ex.Message}", "Error");
@@ -142,7 +187,7 @@ namespace GUI_UniversidadEduca {
                 string descripcion = ObtenerTextoDeEntrada(descripcionSede.Text, "descripcion");
 
                 Sede sede = new Sede(id, descripcion);
-                gestorSede.AgregarSede(sede);
+                GestorSede.AgregarSede(sede);
 
                 var controles = new List<Control>() { idSede, descripcionSede };
                 limpiarCamposTexto(controles);
@@ -160,7 +205,7 @@ namespace GUI_UniversidadEduca {
                 string descripcion = ObtenerTextoDeEntrada(descripcionCurso.Text, "descripción");
 
                 Curso curso = new(id, nombre, descripcion);
-                gestorCurso.AgregarCurso(curso);
+                GestorCurso.AgregarCurso(curso);
 
                 var controles = new List<Control>() { idCurso, nombreCurso, descripcionCurso };
                 limpiarCamposTexto(controles);
@@ -180,19 +225,19 @@ namespace GUI_UniversidadEduca {
                 decimal sueldo = ObtenerDecimalDeEntrada(sueldoProfesor.Text, "sueldo");
                 string usuario = ObtenerTextoDeEntrada(usuarioProfesor.Text, "usuario");
                 string contrasena = ObtenerTextoDeEntrada(contrasenaProfesor.Text, "contraseña");
-                object seleccionSede = sedeProfesor.SelectedItem;
+                object seleccionSede = this.sedeProfesor.SelectedItem;
                 ValidarSeleccionCombobox(seleccionSede, "sede");
 
-                Sede sede = (Sede)seleccionSede;
+                Sede sedeSeleccionadaProfesor = (Sede)seleccionSede;
                 AccesoPlataforma plataforma = new(usuario, contrasena);
-                Profesor profesor = new(id, nombre, apellido, segundoApellido, sueldo, sede, plataforma);
-                gestorProfesor.AgregarProfesor(profesor);
+                Profesor profesor = new(id, nombre, apellido, segundoApellido, sueldo, sedeSeleccionadaProfesor, plataforma);
+                GestorProfesor.AgregarProfesor(profesor);
 
                 var controles = new List<Control>() { idProfesor, nombreProfesor, apellidoProfesor, 
                                                       segundoApellidoProfesor, sueldoProfesor, usuarioProfesor, 
                                                       contrasenaProfesor };
                 limpiarCamposTexto(controles);
-                sedeProfesor.SelectedIndex = -1; //Limpiar selección combobox
+                this.sedeProfesor.SelectedIndex = -1; //Limpiar selección combobox
                
                 MostrarAlerta("Profesor agregado correctamente", "Acción Completada");
             } catch (Exception ex) {
@@ -214,13 +259,12 @@ namespace GUI_UniversidadEduca {
                 ValidarSeleccionCombobox(seleccionSede, "sede");
                 ValidarSeleccionCombobox(seleccionGenero, "género");
 
-                Sede sede = (Sede)seleccionSede;
+                Sede sedeSeleccionada = (Sede)seleccionSede;
                 char genero = seleccionGenero.ToString().Equals("Masculino") ? 'M' : 'F';
-                Estudiante estudiante = new(id, nombre, apellido, segundoApellido, fechaNacimiento, genero, sede);
+                Estudiante estudiante = new(id, nombre, apellido, segundoApellido, fechaNacimiento, genero, sedeSeleccionada);
 
-                gestorEstudiante.AgregarEstudiante(estudiante);
-                
-
+                GestorEstudiante.AgregarEstudiante(estudiante);
+               
                 var controles = new List<Control>() { idEstudiante, nombreEstudiante, apellidoEstudiante,
                                                       segundoApellidoEstudiante, fechaNacimientoEstudiante };
                 limpiarCamposTexto(controles);
@@ -231,6 +275,269 @@ namespace GUI_UniversidadEduca {
             } catch (Exception ex) {
                 MostrarAlerta($"Error al agregar el estudiante: {ex.Message}", "Error");
             }
+        }
+        
+        private void cursosProfesor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Crear fuente de datos
+            var origenDatos = new BindingSource();
+            //Obtener datos
+            var cursoSeleccionado = (Curso)cursosProfesor.SelectedItem;
+            EstudiantesEnCurso = (GestorEstudiante.ObtenerEstudiantesEnCurso(cursoSeleccionado.Id), cursoSeleccionado.Id);
+            //Cargar datos en Tabla(DataGridView)
+            origenDatos.DataSource = EstudiantesEnCurso.Item1;
+            notasCursos.DataSource = origenDatos;
+            AjustarOrdenColumnas();
+            ConfigurarEdicionColumnas();
+        }
+
+        private void asignacionSedeProfesor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            asignacionProfesor.SelectedIndex = -1;
+            asignacionProfesor.Items.Clear();
+
+            Sede sedeSeleccionada = (Sede)asignacionSedeProfesor.SelectedItem;
+
+            if (sedeSeleccionada != null) {
+                //Cargar profesores en comboBox
+                var listaProfesores = GestorProfesor.ObtenerProfesoresPorSede(sedeSeleccionada.Id);
+                foreach (Profesor profesor in listaProfesores)
+                {
+                    if (!asignacionProfesor.Items.Contains(profesor))
+                    {
+                        asignacionProfesor.Items.Add(profesor);
+                    }
+                }
+            }
+        }
+
+        private void asignacionProfesor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Cargar cursos en comboBox
+            var listaCursos = GestorCurso.ObtenerCursos();
+            foreach (Curso curso in listaCursos) {
+                if (!asignacionProfesorCurso.Items.Contains(curso))
+                {
+                    asignacionProfesorCurso.Items.Add(curso);
+                }
+            }
+        }
+
+        private void asignarBtn_Click(object sender, EventArgs e) {
+            try
+            {
+                object seleccionSede = asignacionSedeProfesor.SelectedItem;
+                object seleccionProfesor = asignacionProfesor.SelectedItem;
+                object seleccionCurso = asignacionProfesorCurso.SelectedItem;
+
+                ValidarSeleccionCombobox(seleccionSede, "sede");
+                ValidarSeleccionCombobox(seleccionProfesor, "profesor");
+                ValidarSeleccionCombobox(seleccionCurso, "curso");
+
+                Profesor profesorSeleccionado = (Profesor)seleccionProfesor;
+                Curso cursoSeleccionado = (Curso)seleccionCurso;
+
+                GestorProfesor.AsignarCurso(cursoSeleccionado, profesorSeleccionado);
+                MostrarAlerta($"El curso fue asignado exitosamente", "Acción Completada");
+
+                asignacionSedeProfesor.SelectedIndex = -1;
+                asignacionProfesor.SelectedIndex = -1;
+                asignacionProfesorCurso.SelectedIndex = -1;
+            }
+            catch (Exception ex) {
+                MostrarAlerta($"Error al asignar curso a profesor: {ex.Message}", "Error");
+            }
+        }
+
+        private void sedeMatricula_SelectedIndexChanged(object sender, EventArgs e) {
+            estudianteMatricula.SelectedIndex = -1;
+            estudianteMatricula.Items.Clear();
+
+            Sede sedeSeleccionada = (Sede)sedeMatricula.SelectedItem;
+
+            if (sedeSeleccionada != null)
+            {
+                //Cargar estudiantes en comboBox
+                var listaEstudiantes = GestorEstudiante.ObtenerEstudiantesPorSede(sedeSeleccionada.Id);
+                foreach (Estudiante estudiante in listaEstudiantes)
+                {
+                    if (!estudianteMatricula.Items.Contains(estudiante)) {
+                        estudianteMatricula.Items.Add(estudiante);
+                    }
+                }
+            }
+        }
+
+        private void estudianteMatricula_SelectedIndexChanged(object sender, EventArgs e) {
+            //Cargar cursos en comboBox
+            var listaCursos = GestorCurso.ObtenerCursos();
+            foreach (Curso curso in listaCursos)
+            {
+                if (!cursoMatricula.Items.Contains(curso))
+                {
+                    cursoMatricula.Items.Add(curso);
+                }
+            }
+        }
+
+        private void matricularBtn_Click(object sender, EventArgs e) {
+            try {
+                object seleccionSede = sedeMatricula.SelectedItem;
+                object seleccionEstudiante = estudianteMatricula.SelectedItem;
+                object seleccionCurso = cursoMatricula.SelectedItem;
+
+                ValidarSeleccionCombobox(seleccionSede, "sede");
+                ValidarSeleccionCombobox(seleccionEstudiante, "estudiante");
+                ValidarSeleccionCombobox(seleccionCurso, "curso");
+
+                Estudiante estudianteSeleccionado = (Estudiante)seleccionEstudiante;
+                Curso cursoSeleccionado = (Curso)seleccionCurso;
+
+                GestorEstudiante.MatricularCurso(cursoSeleccionado, estudianteSeleccionado);
+                MostrarAlerta($"El estudiante fue matriculado exitosamente", "Acción Completada");
+
+                sedeMatricula.SelectedIndex = -1;
+                estudianteMatricula.SelectedIndex = -1;
+                cursoMatricula.SelectedIndex = -1;
+            }
+            catch (Exception ex) {
+                MostrarAlerta($"Error al matricular estudiante: {ex.Message}", "Error");
+            }
+        }
+
+        private void seleccionSedeEstudiante_SelectedIndexChanged(object sender, EventArgs e) {
+            seleccionEstudiante.SelectedIndex = -1;
+            seleccionEstudiante.Items.Clear();
+
+            var controles = new List<Control>() { idEstudianteInfo, nombreEstudianteInfo, apellidoEstudianteInfo,
+                                                      segApellidoEstudianteInfo, fechaNacimientoEstudianteInfo,  generoEstudianteInfo};
+            limpiarCamposTexto(controles);
+            infoCursos.Rows.Clear();
+
+            Sede sedeSeleccionada = (Sede)seleccionSedeEstudiante.SelectedItem;
+
+            if (sedeSeleccionada != null) {
+                //Cargar estudiantes en comboBox
+                var listaEstudiantes = GestorEstudiante.ObtenerEstudiantesPorSede(sedeSeleccionada.Id);
+                foreach (Estudiante estudiante in listaEstudiantes) {
+                    if (!seleccionEstudiante.Items.Contains(estudiante)) {
+                        seleccionEstudiante.Items.Add(estudiante);
+                    }
+                }
+            }
+        }
+
+        private void seleccionEstudiante_SelectedIndexChanged(object sender, EventArgs e) {
+            object estudianteSeleccionado = seleccionEstudiante.SelectedItem;
+            Estudiante estudiante = (Estudiante)estudianteSeleccionado;
+
+            if (estudiante != null) {
+                //Cargar información estudiante
+                idEstudianteInfo.Text = estudiante.Id.ToString();
+                nombreEstudianteInfo.Text = estudiante.Nombre;
+                apellidoEstudianteInfo.Text = estudiante.Apellido;
+                segApellidoEstudianteInfo.Text = estudiante.SegundoApellido;
+                fechaNacimientoEstudianteInfo.Value = estudiante.FechaNacimiento;
+                generoEstudianteInfo.Text = estudiante.Genero.Equals('M') ? Generos[0] : Generos[1];
+
+                //Cargar cursos
+
+                //Crear fuente de datos
+                var origenDatos = new BindingSource();
+
+                //Cargar datos en Tabla(DataGridView)
+                origenDatos.DataSource = estudiante.Cursos;
+                infoCursos.DataSource = origenDatos;
+            }
+        }
+
+        private void guardarNotasBtn_Click(object sender, EventArgs e) {
+            try
+            {
+                ValidarNotasEditadas();
+                GestorNotas.ActualizarNotas(EstudiantesEnCurso);
+                MostrarAlerta("Las notas fueron actualizadas correctamente", "Acción Completada");
+            }
+            catch (InvalidCastException)
+            {
+                MostrarAlerta($"Error al actualizar las notas: Por favor digite únicamente números en el campo de notas", "Error");
+            }
+            catch (Exception ex)
+            {
+                MostrarAlerta($"Error al actualizar las notas: {ex.Message}", "Error");
+            }
+        }
+
+        private void seleccionSedeProf_SelectedIndexChanged(object sender, EventArgs e) {
+            profesorInfo.SelectedIndex = -1;
+            profesorInfo.Items.Clear();
+            var controles = new List<Control>() { idProfesorInfo, nombreProfesorInfo, apellidoProfesorInfo,
+                                                      segApellidoProfesorInfo, sueldoProfesorInfo,  usuarioProfesorInfo, contrasenaProfesorInfo};
+            limpiarCamposTexto(controles);
+            cursosProfesorInfo.Rows.Clear();
+
+            Sede sedeSeleccionada = (Sede)seleccionSedeProf.SelectedItem;
+
+            if (sedeSeleccionada != null) {
+                //Cargar profesores en comboBox
+                var listaProfesores = GestorProfesor.ObtenerProfesoresPorSede(sedeSeleccionada.Id);
+                foreach (Profesor profesor in listaProfesores)
+                {
+                    if (!profesorInfo.Items.Contains(profesor)) {
+                        profesorInfo.Items.Add(profesor);
+                    }
+                }
+            }
+        }
+
+        private void profesorInfo_SelectedIndexChanged(object sender, EventArgs e) {
+            object profesorSeleccionado = profesorInfo.SelectedItem;
+            Profesor profesor = (Profesor)profesorSeleccionado;
+
+            if (profesor != null) {
+                //Cargar información estudiante
+                idProfesorInfo.Text = profesor.Id.ToString();
+                nombreProfesorInfo.Text = profesor.Nombre;
+                apellidoProfesorInfo.Text = profesor.Apellido;
+                segApellidoProfesorInfo.Text = profesor.SegundoApellido;
+                sueldoProfesorInfo.Text = profesor.Sueldo.ToString();
+                usuarioProfesorInfo.Text = profesor.Plataforma.Usuario;
+                contrasenaProfesorInfo.Text = profesor.Plataforma.Contrasena;
+
+                //Cargar cursos
+
+                //Crear fuente de datos
+                var origenDatos = new BindingSource();
+
+                //Cargar datos en Tabla(DataGridView)
+                origenDatos.DataSource = profesor.Cursos;
+                cursosProfesorInfo.DataSource = origenDatos;
+                cursosProfesorInfo.Columns["Nota"].Visible = false;
+            }
+        }
+
+        private void ConfigurarEdicionColumnas()
+        {
+            notasCursos.Columns["Id"].ReadOnly = true;
+            notasCursos.Columns["Nombre"].ReadOnly = true;
+            notasCursos.Columns["Apellido"].ReadOnly = true;
+            notasCursos.Columns["SegundoApellido"].ReadOnly = true;
+            notasCursos.Columns["Nota"].ReadOnly = false;
+            notasCursos.Columns["FechaNacimiento"].ReadOnly = true;
+            notasCursos.Columns["Genero"].ReadOnly = true;
+            notasCursos.Columns["Sede"].ReadOnly = true;
+        }
+
+        private void AjustarOrdenColumnas()
+        {
+            notasCursos.Columns["Id"].DisplayIndex = 0;
+            notasCursos.Columns["Nombre"].DisplayIndex = 1;
+            notasCursos.Columns["Apellido"].DisplayIndex = 2;
+            notasCursos.Columns["SegundoApellido"].DisplayIndex = 3;
+            notasCursos.Columns["Nota"].DisplayIndex = 4;
+            notasCursos.Columns["FechaNacimiento"].DisplayIndex = 5;
+            notasCursos.Columns["Genero"].DisplayIndex = 6;
+            notasCursos.Columns["Sede"].DisplayIndex = 7;
         }
 
         private void limpiarCamposTexto(List<Control> controles) {
@@ -298,11 +605,24 @@ namespace GUI_UniversidadEduca {
             return "".Equals(inputText);
         }
 
+        private void ValidarNotasEditadas()
+        {
+            var indiceColumnaNotas = 3;
+            foreach (DataGridViewRow fila in notasCursos.Rows) {
+                var valorEnCelda = fila.Cells[indiceColumnaNotas].Value;
+                var nuevaNota = (int)valorEnCelda;
+                if (nuevaNota < 0)
+                {
+                    throw new NumeroNegativoException($"Por favor digite únicamente números positivos en el campo de notas");
+                }
+            }
+        }
 
         #endregion
 
-        private void cursosProfesor_SelectedIndexChanged(object sender, EventArgs e) {
-            MessageBox.Show("BOOMBOX");
+        private void notasCursos_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MostrarAlerta($"Error al actualizar las notas. Por favor digite únicamente números en el campo de notas", "Error");
         }
     }
 }

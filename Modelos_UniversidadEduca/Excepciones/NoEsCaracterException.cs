@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace UniversidadEduca_Tarea1.Exceptions {
+namespace Modelos_UniversidadEduca.Excepciones
+{
     public class NoEsCaracterException : ApplicationException {
         public NoEsCaracterException(string mensaje) : base(mensaje) {
 

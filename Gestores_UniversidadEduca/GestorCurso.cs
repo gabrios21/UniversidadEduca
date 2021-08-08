@@ -17,5 +17,9 @@ namespace Gestores_UniversidadEduca {
         public void AgregarCurso(Curso curso) {
             MapaDatos.CrearCurso(curso);
         }
+
+        public List<Curso> ObtenerCursos() {
+            return MapaDatos.ObtenerCurriculo();
+        }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Modelos_UniversidadEduca.Excepciones;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using UniversidadEduca_Tarea1.Exceptions;
 using UniversidadEduca_Tarea1.Models;
 
 namespace AccesoDatos_UniversidadEduca {
@@ -43,6 +43,34 @@ namespace AccesoDatos_UniversidadEduca {
                 comando.Parameters.AddWithValue("@SegundoApellido", estudiante.SegundoApellido);
                 comando.Parameters.AddWithValue("@FechaNacimiento", estudiante.FechaNacimiento);
                 comando.Parameters.AddWithValue("@Genero", estudiante.Genero);
+
+                comando.ExecuteNonQuery();
+
+            }
+        }
+
+        public void ActualizarNotas(int idCurso, int idEstudiante, int notaFinal)
+        {
+            string sentenciaSql = @"UPDATE CursoEstudiante 
+                                    SET NotaFinal = @NotaFinal
+                                    WHERE IdCurso = @IdCurso AND IdEstudiante = @IdEstudiante";
+
+            using (SqlConnection conexion = new(InformacionConexion))
+            {
+
+                SqlCommand comando = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdCurso", idCurso);
+                comando.Parameters.AddWithValue("@IdEstudiante", idEstudiante);
+                comando.Parameters.AddWithValue("@NotaFinal", notaFinal);
 
                 comando.ExecuteNonQuery();
 
@@ -322,7 +350,7 @@ namespace AccesoDatos_UniversidadEduca {
             return false;
         }
 
-        public void MatricularEstudiante(int estudianteId, int cursoId) {
+        public void MatricularEstudiante(int cursoId, int estudianteId) {
 
             string sentenciaSql = @"INSERT INTO CursoEstudiante (IdCurso, IdEstudiante)
                                     VALUES (@IdCurso, @IdEstudiante)";
@@ -345,7 +373,7 @@ namespace AccesoDatos_UniversidadEduca {
             }
         }
 
-        public void AsignarProfesorACurso(int profesorId, int cursoId) {
+        public void AsignarProfesorACurso(int cursoId, int profesorId) {
 
             string sentenciaSql = @"INSERT INTO CursoProfesor (IdCurso, IdProfesor)
                                     VALUES (@IdCurso, @IdProfesor)";
@@ -411,6 +439,57 @@ namespace AccesoDatos_UniversidadEduca {
                 }
             }
 
+            return profesores;
+        }
+
+        public List<Profesor> ObtenerProfesoresPorSede(int idSede)
+        {
+            List<Profesor> profesores = new();
+            SqlDataReader lector;
+
+
+            string sentenciaSql = @"SELECT IdProfesor, IdSede, Nombre, PrimerApellido, SegundoApellido, Sueldo, Usuario, Contrasenna
+                                    FROM Profesor
+                                    WHERE IdSede = @IdSede";
+
+            using (SqlConnection conexion = new(InformacionConexion))
+            {
+
+                SqlCommand comando = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdSede", idSede);
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows)
+                {
+                    while (lector.Read())
+                    {
+                        var id = lector.GetInt32(0);
+                        var sedeId = lector.GetInt32(1);
+                        var nombre = lector.GetString(2);
+                        var apellido = lector.GetString(3);
+                        var segundoApellido = lector.GetString(4);
+                        //El sueldo puede ser nulo según la BD, así que asignamos 0 en esos casos
+                        var sueldo = lector.IsDBNull(5) ? 0 : lector.GetDecimal(5);
+                        var usuario = lector.GetString(6);
+                        var contrasena = lector.GetString(7);
+                        //Obtener objeto sede
+                        Sede sede = ObtenerSede(sedeId);
+                        AccesoPlataforma infoPlataforma = new(usuario, contrasena);
+                        Profesor profesor = new(id, nombre, apellido, segundoApellido, sueldo, sede, infoPlataforma);
+                        profesor.Cursos = ObtenerCursosProfesor(profesor.Id);
+                        profesores.Add(profesor);
+                    }
+                }
+            }
             return profesores;
         }
 
@@ -523,9 +602,59 @@ namespace AccesoDatos_UniversidadEduca {
                         var segundoApellido = lector.GetString(4);
                         //La fecha de nacimiento puede ser nula según la BD, así que asignamos el valor defecto en esos casos
                         var fechaNacimiento = lector.IsDBNull(5) ? default : lector.GetDateTime(5); 
-                        var genero = lector.GetChar(6);
+                        var genero = lector.GetString(6)[0];
                         //Obtener objeto sede
                         Sede sede = ObtenerSede(idSede);
+                        Estudiante estudiante = new(id, nombre, apellido, segundoApellido, fechaNacimiento, genero, sede);
+                        //Obtener cursos
+                        estudiante.Cursos = ObtenerCursosEstudiante(estudiante.Id);
+                        estudiantes.Add(estudiante);
+                    }
+                }
+            }
+
+            return estudiantes;
+        }
+
+        public List<Estudiante> ObtenerEstudiantesPorSede(int idSede) {
+            List<Estudiante> estudiantes = new();
+            SqlDataReader lector;
+
+
+            string sentenciaSql = @"SELECT IdEstudiante, IdSede, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Genero
+                                    FROM Estudiante
+                                    WHERE IdSede = @IdSede";
+
+            using (SqlConnection conexion = new(InformacionConexion))
+            {
+
+                SqlCommand comando = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdSede", idSede);
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows)
+                {
+                    while (lector.Read())
+                    {
+                        var id = lector.GetInt32(0);
+                        var sedeId = lector.GetInt32(1);
+                        var nombre = lector.GetString(2);
+                        var apellido = lector.GetString(3);
+                        var segundoApellido = lector.GetString(4);
+                        //La fecha de nacimiento puede ser nula según la BD, así que asignamos el valor defecto en esos casos
+                        var fechaNacimiento = lector.IsDBNull(5) ? default : lector.GetDateTime(5);
+                        var genero = lector.GetString(6)[0];
+                        //Obtener objeto sede
+                        Sede sede = ObtenerSede(sedeId);
                         Estudiante estudiante = new(id, nombre, apellido, segundoApellido, fechaNacimiento, genero, sede);
                         //Obtener cursos
                         estudiante.Cursos = ObtenerCursosEstudiante(estudiante.Id);
@@ -564,7 +693,7 @@ namespace AccesoDatos_UniversidadEduca {
                     while (lector.Read()) {
                         var idCurso = lector.GetInt32(0);
                         var curso = ObtenerCurso(idCurso);
-                        curso.Nota = lector.GetInt16(1);
+                        curso.Nota =  lector.IsDBNull(1) ? 0 : lector.GetInt16(1);
                         cursos.Add(curso);
                     }
                 }
@@ -572,6 +701,60 @@ namespace AccesoDatos_UniversidadEduca {
 
             return cursos;
 
+        }
+
+        public List<Estudiante> ObtenerEstudiantesEnCurso(int idCurso)
+        {
+
+            List<Estudiante> estudiantesEnCurso = new();
+            SqlDataReader lector;
+
+            string sentenciaSql = @"SELECT e.IdEstudiante, e.IdSede, e.Nombre, e.PrimerApellido, e.SegundoApellido, e.FechaNacimiento, e.Genero, c.NotaFinal
+                                    FROM Estudiante e
+                                    JOIN CursoEstudiante c
+                                    ON e.IdEstudiante = c.IdEstudiante 
+                                    WHERE c.IdCurso = @IdCurso";
+
+            using (SqlConnection conexion = new(InformacionConexion))
+            {
+
+                SqlCommand comando = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = sentenciaSql,
+                    Connection = conexion
+                };
+
+                conexion.Open();
+                //Agregar parametros
+                comando.Parameters.AddWithValue("@IdCurso", idCurso);
+
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows)
+                {
+                    while (lector.Read())
+                    {
+                        var id = lector.GetInt32(0);
+                        var idSede = lector.GetInt32(1);
+                        var nombre = lector.GetString(2);
+                        var apellido = lector.GetString(3);
+                        var segundoApellido = lector.GetString(4);
+                        //La fecha de nacimiento puede ser nula según la BD, así que asignamos el valor defecto en esos casos
+                        var fechaNacimiento = lector.IsDBNull(5) ? default : lector.GetDateTime(5);
+                        var genero = lector.GetString(6)[0];
+                        //Obtener objeto sede
+                        Sede sede = ObtenerSede(idSede);
+                        Estudiante estudiante = new(id, nombre, apellido, segundoApellido, fechaNacimiento, genero, sede);
+                        //Obtener cursos
+                        estudiante.Cursos = ObtenerCursosEstudiante(estudiante.Id);
+                        estudiante.Nota = lector.IsDBNull(7) ? default : lector.GetInt16(7);
+                        estudiantesEnCurso.Add(estudiante);
+                    }
+                }
+            }
+
+            return estudiantesEnCurso;
         }
 
         public List<Curso> ObtenerCurriculo() {

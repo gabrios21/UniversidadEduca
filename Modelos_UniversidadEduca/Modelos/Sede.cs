@@ -12,5 +12,13 @@
             var sedeEnTexto = $"{Id} - {Descripcion}";
             return sedeEnTexto;
         }
+        public override bool Equals(object obj) {
+            return obj is Sede sede &&
+                   Id == sede.Id;
+        }
+
+        public override int GetHashCode() {
+            return System.HashCode.Combine(Id);
+        }
     }
 }

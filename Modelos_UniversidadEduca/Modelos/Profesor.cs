@@ -7,5 +7,18 @@
             Sueldo = sueldo;
             Plataforma = infoPlataforma;
         }
+
+        public override string ToString() {
+            var profesorEnTexto = $"{Nombre} {Apellido} {SegundoApellido}";
+            return profesorEnTexto;
+        }
+        public override bool Equals(object obj) {
+            return obj is Profesor profesor &&
+                   Id == profesor.Id;
+        }
+
+        public override int GetHashCode() {
+            return System.HashCode.Combine(Id);
+        }
     }
 }
